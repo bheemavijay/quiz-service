@@ -12,15 +12,15 @@ import java.util.List;
 @FeignClient(name = "question-service", url = "http://localhost:8082")
 public interface QuestionClient {
 
-    @GetMapping("question/generate")
+    @GetMapping("api/questions/generate")
     ResponseEntity<List<Long>> getQuestionsForQuiz(@RequestParam String categoryName, @RequestParam Integer numQuestions);
 
-    @PostMapping("question/getQuestions")
+    @PostMapping("api/questions/getQuestions")
     ResponseEntity<List<Object>> getQuestionsFromId(@RequestBody List<Long> questionIds);
 
-    @PostMapping("question/getScore")
+    @PostMapping("api/questions/getScore")
     ResponseEntity<Integer> getScore(@RequestBody List<Object> responses);
 
-    @GetMapping("questions/random")
+    @GetMapping("api/questions/random")
     ResponseEntity<List<Long>> getRandomQuestions(@RequestParam Integer limit);
 }

@@ -1,0 +1,242 @@
+{
+	"info": {
+		"_postman_id": "b3e3e3e3-1234-5678-9012-abcdef123456",
+		"name": "Quiz Service API",
+		"description": "Collection for testing Quiz Microservice endpoints. Includes examples for Frontend integration.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Quiz (Manual Category)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"categoryName\": \"Java\",\n    \"numberOfQuestions\": 5,\n    \"title\": \"Java Basics Quiz\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/quiz/create",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"quiz",
+						"create"
+					]
+				},
+				"description": "Creates a quiz by fetching specific questions from question-service based on category."
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"categoryName\": \"Java\",\n    \"numberOfQuestions\": 5,\n    \"title\": \"Java Basics Quiz\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/quiz/create",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"quiz",
+								"create"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "text",
+					"header": [],
+					"cookie": [],
+					"body": "Success"
+				}
+			]
+		},
+		{
+			"name": "Start Quiz (Random)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Random Daily Quiz\",\n    \"numberOfQuestions\": 3\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/quiz/start",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"quiz",
+						"start"
+					]
+				},
+				"description": "Starts a new quiz with random questions. Returns the Quiz ID and the list of Question objects. Use this for the 'Start Quiz' button in Frontend."
+			},
+			"response": [
+				{
+					"name": "Example Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Random Daily Quiz\",\n    \"numberOfQuestions\": 3\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/quiz/start",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"quiz",
+								"start"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"quizId\": 12,\n    \"questions\": [\n        {\n            \"id\": 101,\n            \"questionTitle\": \"What is Java?\",\n            \"option1\": \"Language\",\n            \"option2\": \"Coffee\",\n            \"option3\": \"Island\",\n            \"option4\": \"None\",\n            \"rightAnswer\": \"Language\",\n            \"difficultyLevel\": \"Easy\",\n            \"category\": \"Java\"\n        },\n        {\n            \"id\": 105,\n            \"questionTitle\": \"What is Spring?\",\n            \"option1\": \"Season\",\n            \"option2\": \"Framework\",\n            \"option3\": \"Coil\",\n            \"option4\": \"Jump\",\n            \"rightAnswer\": \"Framework\",\n            \"difficultyLevel\": \"Medium\",\n            \"category\": \"Java\"\n        },\n        {\n            \"id\": 109,\n            \"questionTitle\": \"Which annotation is used for Controller?\",\n            \"option1\": \"@Service\",\n            \"option2\": \"@Repository\",\n            \"option3\": \"@Controller\",\n            \"option4\": \"@Component\",\n            \"rightAnswer\": \"@Controller\",\n            \"difficultyLevel\": \"Easy\",\n            \"category\": \"Spring Boot\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Get All Quizzes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/quiz/all",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"quiz",
+						"all"
+					]
+				},
+				"description": "Retrieves a list of all created quizzes."
+			},
+			"response": [
+				{
+					"name": "Example Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/quiz/all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"quiz",
+								"all"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"title\": \"Java Basics\",\n        \"numberOfQuestions\": 5,\n        \"createdAt\": \"2023-10-27T10:00:00\",\n        \"questionIds\": [\n            1,\n            2,\n            3,\n            4,\n            5\n        ]\n    },\n    {\n        \"id\": 2,\n        \"title\": \"Python Intro\",\n        \"numberOfQuestions\": 10,\n        \"createdAt\": \"2023-10-28T14:30:00\",\n        \"questionIds\": [\n            12,\n            14,\n            15\n        ]\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get Quiz By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/quiz/id/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"quiz",
+						"id",
+						"1"
+					]
+				},
+				"description": "Retrieves details of a specific quiz by its ID."
+			},
+			"response": [
+				{
+					"name": "Example Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/quiz/id/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"quiz",
+								"id",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"title\": \"Java Basics\",\n    \"numberOfQuestions\": 5,\n    \"createdAt\": \"2023-10-27T10:00:00\",\n    \"questionIds\": [\n        1,\n        2,\n        3,\n        4,\n        5\n    ]\n}"
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8084",
+			"type": "string"
+		}
+	]
+}
