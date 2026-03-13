@@ -5,9 +5,9 @@ spring:
   application:
     name: quiz-service
   datasource:
-    url: jdbc:postgresql://localhost:5432/quiz_db
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://ep-rapid-sound-a1kaofxv-pooler.ap-southeast-1.aws.neon.tech/quiz_db?sslmode=require&channel_binding=require
+    username: neondb_owner
+    password: npg_mNdp0bjfCsX9
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
