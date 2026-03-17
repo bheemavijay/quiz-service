@@ -1,4 +1,4 @@
-name: Build Spring Boot Service
+name: CI/CD Quiz Service
 
 on:
   push:
@@ -9,11 +9,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    env:
-      SPRING_DATASOURCE_URL: ${{ secrets.SPRING_DATASOURCE_URL }}
-      SPRING_DATASOURCE_USERNAME: ${{ secrets.SPRING_DATASOURCE_USERNAME }}
-      SPRING_DATASOURCE_PASSWORD: ${{ secrets.SPRING_DATASOURCE_PASSWORD }}
-
     steps:
       - uses: actions/checkout@v4
 
@@ -22,4 +17,14 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - run: mvn clean package -DskipTests
+      - name: Build JAR
+        run: mvn clean package -DskipTests
+
+      - name: Login to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Build Docker Image
+        run: docker build -t vkrishnan1999/quiz-service .
+
+      - name: Push Docker Image
+        run: docker push vkrishnan1999/quiz-service
